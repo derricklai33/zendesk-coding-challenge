@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { getAllTickets } = require('../controller/tickets_controller');
+const { getAllTickets, getSpecificTickets} = require('../controller/tickets_controller');
 
-router.get('/all', getAllTickets)
+router.get('/:ticket_id', getSpecificTickets)
+router.get('/', getAllTickets)
 
 module.exports = router;
