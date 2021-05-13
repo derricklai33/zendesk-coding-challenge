@@ -1,7 +1,6 @@
 const axios = require("axios");
-const { response } = require("express");
 
-async function getAllTickets(req, res) {
+async function getAllTickets(_req, res) {
   let tickets = [];
   let url = `https://derricklai-zendesk-challenge.zendesk.com/api/v2/tickets.json`;
   try {
@@ -9,8 +8,8 @@ async function getAllTickets(req, res) {
       const responseData = await axios
         .get(url, {
           auth: {
-            username: "derrick.laijy@gmail.com",
-            password: "q1w2e3r4t5",
+            username: process.env.LOGIN,
+            password: process.env.PASSWORD,
           },
         })
         .catch((error) => {
@@ -32,8 +31,8 @@ function getSpecificTickets(req, res) {
     axios
       .get(url, {
         auth: {
-          username: "derrick.laijy@gmail.com",
-          password: "q1w2e3r4t5",
+          username: process.env.LOGIN,
+          password: process.env.PASSWORD,
         },
       })
       .then((response) => response.data)
