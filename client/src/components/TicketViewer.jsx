@@ -27,6 +27,7 @@ export function TicketViewer(props) {
         (data.error === "" ? (
           <>
             <h1>{data.ticket.subject}</h1>
+            <h4>{`Submitted by: ${data.ticket.submitter_id}`}</h4>
             <p>{data.ticket.description}</p>
           </>
         ) : (
