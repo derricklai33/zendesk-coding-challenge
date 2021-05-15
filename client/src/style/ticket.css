@@ -1,0 +1,9 @@
+.ticket-viewer-div {
+  display: flex;
+  flex-direction: column;
+}
+
+.ticket-display-div {
+  display: flex;
+  flex-direction: column;
+}
