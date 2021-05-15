@@ -1,15 +1,30 @@
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react'
+import { Link } from "react-router-dom";
 
-export function AllTicketViewer (props) {
+export function AllTicketViewer(props) {
   const { data } = props;
-  console.log(data);
-  return(
+  const [ pages, setPages ] = useState(0);
+
+  return (
     <>
-    <h1>Tickets</h1>
-    {data && (
-      data.tickets.map((item, index) => {
-        return <Link key={index} to={`/${item.id}`}>{item.subject}</Link>
-      })
+      <h1>All Tickets</h1>
+      {data && (
+        data.tickets.length > 0 ? (
+          data.tickets[pages].map((item, index) => {
+          return(
+            <Link key={index} to={`/${item.id}`}>
+              {`${item.id}. ${item.subject}`}
+            </Link>
+          )
+          })
+        ) :
+        <h2>{data.error}</h2>
+      )}
+      {data && (
+        <>
+        {pages !== 0 ? <button onClick={() => { setPages(pages - 1)}}> {`<`} </button>: <button disabled={true}> {'<'}</button>}
+        {pages === data.tickets.length - 1 ? <button disabled={true}>{'>'}</button> : <button onClick={() => { setPages(pages + 1)}}> {`>`} </button>}
+        </>
       )}
     </>
   );
