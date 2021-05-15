@@ -1,19 +1,25 @@
 const axios = require("axios"); 
 
 // GET controller for all available tickets
-async function getAllTickets(_req, res) {
+async function getAllTickets(req, res) {
+  const login = req.query.login;
+  const password = req.query.password;
   const ticketsPerPage = 25;
   let data = {tickets: [], error: ""};
   let url = `https://derricklai-zendesk-challenge.zendesk.com/api/v2/tickets.json`;
+  // GET request using axios
   try {
+    // do while loop to append all tickets into data.tickets
     do {
-      const responseData = await axiosGetFunction(url)
+      const responseData = await axiosGetFunction(url, login, password)
       data.tickets = [...data.tickets, ...responseData.data.tickets];
       url = responseData.data.next_page;
     } while (url !== null);
+    // Set to chunks of 25 using helper function (pagination manually)
     data.tickets = setTicketsToChunks(data.tickets, ticketsPerPage)
   } catch (error) {
     console.log(error.message);
+    // Sets error messages accordingly using errorMessages helper function
     data.error = errorMessages(error.response.status);
   } finally {
     res.send(data);
@@ -22,13 +28,17 @@ async function getAllTickets(_req, res) {
 
 // GET controller for specific ticket based on id
 async function getSpecificTickets(req, res) {
+  const login = req.query.login;
+  const password = req.query.password;
   let data = {ticket: {}, error: ""};
   let url = `https://derricklai-zendesk-challenge.zendesk.com/api/v2/tickets/${req.params.ticket_id}.json`;
+  
   try {
-    const responseData = await axiosGetFunction(url)
+    const responseData = await axiosGetFunction(url, login, password)
     data.ticket = responseData.data.ticket;
   } catch (error) {
     console.log(error.message)
+    // Sets error messages accordingly using errorMessages helper function
     data.error = errorMessages(error.response.status);
   } finally {
     res.send(data);
