@@ -1,13 +1,13 @@
-const express = require('express');
-const routes = require('./routes/routes');
+const express = require("express");
+const routes = require("./routes/routes");
 
 const app = express();
-require('dotenv').config();
-const cors = require('cors');
+require("dotenv").config();
+const cors = require("cors");
 
 // cors for communicating with react app
-app.use(cors())
+app.use(cors());
 
-app.use('/tickets', routes);
+app.use("/tickets", routes);
 
 module.exports = app;

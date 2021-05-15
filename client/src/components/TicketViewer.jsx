@@ -6,8 +6,8 @@ export function TicketViewer(props) {
   const [data, setData] = useState();
 
   useEffect(() => {
-    fetchSpecificTicket(props.match.params.id)
-  }, [props.match.params.id])
+    fetchSpecificTicket(props.match.params.id);
+  }, [props.match.params.id]);
   async function fetchSpecificTicket(id) {
     try {
       const response = await axios.get(
@@ -31,7 +31,7 @@ export function TicketViewer(props) {
             <p>{data.ticket.description}</p>
           </>
         ) : (
-        <h2>{data.error}</h2>
+          <h2>{data.error}</h2>
         ))}
     </>
   );
