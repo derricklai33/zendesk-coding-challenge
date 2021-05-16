@@ -7,6 +7,7 @@ This app was made as part of the coding assessment for Zendesk's 2021 Software E
 - NodeJS v12.19.0 or later versions
 - Git 
 - Basic knowledge of using terminal/CLI commands e.g. `cd` & `git`
+- Copying .env file into application
 
 ### **Installation**
 
